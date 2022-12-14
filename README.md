@@ -21,7 +21,7 @@ Create a .env file at the root of the project to store your secrets.
 If you're using HubSpot's APIs, you'll need to include a private app token from the HubSpot account you're accessing. Learn more about private app tokens here: https://developers.hubspot.com/docs/api/private-apps
 
 Your .env file will look something like this:
-```json
+```
 privateAppToken = "abcde-fghijk-lmnopq-rstuv-wxyz"
 googleApiKey = "1234567890"
 ```
@@ -62,48 +62,78 @@ A new folder will be created with three files
 #### cca.js is where you write your code
 
 ```JavaScript 
-const axios = require('axios');
-
-const axiosConfig = {
-    headers: {
-        authorization: `Bearer ${process.env.privateAppToken}`
-    }
-};
+const hubspot = require('@hubspot/api-client');
 
 exports.main = async (event, callback) => {
 
-    /**
-     * @name getPortalInfo
-     * @desc Grab the portal id and various other infos
-     * @returns {promise}it returns an axios object
-     */
-    const getPortalInfo = async () => {
-        const endpoint = `https://api.hubapi.com/integrations/v1/me`;
+  /*****
+    How to use secrets
+    Secrets are a way for you to save API keys or private apps and set them as a variable to use anywhere in your code
+    Each secret needs to be defined like the example below
+  *****/
 
-        return axios.get(endpoint, axiosConfig);
+  const hubspotClient = new hubspot.Client({
+    accessToken: process.env.SECRET_NAME
+  });
+
+  let phone;
+  try {
+    const ApiResponse = await hubspotClient.crm.contacts.basicApi.getById(event.object.objectId, ["phone"]);
+    phone = ApiResponse.body.properties.phone;
+  } catch (err) {
+    console.error(err);
+    // We will automatically retry when the code fails because of a rate limiting error from the HubSpot API.
+    throw err;
+  }
+
+  /*****
+    How to use inputs
+    Inputs are a way for you to take data from any actions in your workflow and use it in your code instead of having to call the HubSpot API to get that same data.
+    Each input needs to be defined like the example below
+  *****/
+
+  const email = event.inputFields['email'];
+
+
+  /*****
+    How to use outputs
+    Outputs are a way for you to take data from your code and use it in later workflows actions
+
+    Use the callback function to return data that can be used in later actions.
+    Data won't be returned until after the event loop is empty, so any code after this will still execute.
+  *****/
+
+  callback({
+    outputFields: {
+      email: email,
+      phone: phone
     }
-
-    
-    const domainName = event.inputFields.domainName;
-
-    if (!domainName) throw new Error('domainName is not set, are you sure you put domainName in the "properties to include in code" ? ');
-
-
-    const portalInfos = await getPortalInfo();
-
-    if (!portalInfos.data) throw new Error(`We couldn't grab your portal infos`);
-
-    const { portalId, timeZone, currency } = portalInfos.data;
-
-    callback({
-        outputFields: {
-            portalId,
-            timeZone,
-            currency
-        }
-    });
-
+  });
 }
+
+/* A sample event may look like:
+{
+  "origin": {
+    // Your portal ID
+    "portalId": 1,
+
+    // Your custom action definition ID
+    "actionDefinitionId": 2,
+  },
+  "object": {
+    // The type of CRM object that is enrolled in the workflow
+    "objectType": "CONTACT",
+
+    // The ID of the CRM object that is enrolled in the workflow
+    "objectId": 4,
+  },
+  "inputFields": {
+    // The property name for defined inputs
+  },
+  // A unique ID for this execution
+  "callbackId": "ap-123-456-7-8"
+}
+*/
 ```
 
 #### event.js represents the properties you can include in code
@@ -113,11 +143,11 @@ In a HubSpot workflow, these properties can be included in the event object by u
 
 ```JavaScript
 exports.events = {
-    // object: {
-    //     objectId: 3401
-    // },
+    object: {
+         objectId: 1
+    },
     inputFields: {
-        domainName : "google.com"
+        email : "coolrobot@hubspot.com"
     }
 }
 ```
