@@ -152,10 +152,10 @@ exports.events = {
 }
 ```
 
-In this example to access companyName, you have to use : 
+In this example to access email, you have to use : 
 
 ```JavaScript
- const domainName = event.inputFields.domainName;
+ const email = event.inputFields.email;
 ```
 
 ### Run custom code action
