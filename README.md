@@ -60,9 +60,7 @@ A new folder will be created with three files
 - readme
 
 
-#### cca.js
-
-This is where you write your code. 
+#### cca.js is where you write your code
 
 ```JavaScript 
 const axios = require('axios');
@@ -109,7 +107,9 @@ exports.main = async (event, callback) => {
 }
 ```
 
-The event.js file represent the properties you can include in code. 
+#### event.js represents the properties you can include in code
+
+In a HubSpot workflow, these properties can be included in the event object by using the settings within the workflow action editor.
 
 
 ```JavaScript
@@ -142,5 +142,3 @@ Like:
 ```bash
 node run ccs get-contact 
 ```
-
-
