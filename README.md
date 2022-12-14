@@ -8,32 +8,42 @@ It also provides a "framework" to work locally on your Custom Coded Action and e
 
 ## How to use
 
+Prerequisites
+- Install Node.js from https://nodejs.org/en/download/
+
 ### Clone repo locally
 ```
 gh repo clone elliott30/hubspot-custom-code-action-workspace
 ```
 ### Create a .env file
-```
-create a .env file at the root of the project to store your secrets
-If you're using HubSpot's APIs, you'll need to include a private app token from the HubSpot account you're accessing  
-Learn more about private app tokens here:
-https://developers.hubspot.com/docs/api/private-apps
 
+Create a .env file at the root of the project to store your secrets.
+
+If you're using HubSpot's APIs, you'll need to include a private app token from the HubSpot account you're accessing. Learn more about private app tokens here: https://developers.hubspot.com/docs/api/private-apps
+
+Your .env file will look something like this:
 ```
-It should look something like this:
-privateAppToken = "sdfsd-dsfsdf-wwxcwx-ffdsdfdsf-fsdffdsfs"
+privateAppToken = "abcde-fghijk-lmnopq-rstuv-wxyz"
+googleApiKey = "1234567890"
 ```
+
 ### (Optional) Test an existing an custom code action
 
+Run one of the existing projects using:
+
 ```
-Run one of the existing projects, for example
+npm run cca <folder-name>
+```
+For example, to run the custom code action that gets a contact's name from your HubSpot account, run:
+```
+npm run cca get-contact
 ```
 
 
 ### Create a new custom code action 
 
 
-You have to initialize a new custom code action by calling 
+Initialize a new custom code action by calling 
 
 ```
 npm run init <nameOfYourAction>
