@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+// if (!process.env.privateAppToken) throw new Error('The private APP token is missing ');
+
 // takes the folder name from the CLI args
 process.argv.splice(0, 2);
 let [folderName = false] = process.argv

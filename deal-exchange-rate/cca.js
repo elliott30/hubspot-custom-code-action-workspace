@@ -1,43 +1,19 @@
-const axios = require('axios');
-
-const axiosConfig = {
-    headers: {
-        authorization: `Bearer ${process.env.privateAppToken}`
-    }
-};
-
-if (!process.env.privateAppToken) throw new Error('The private APP token is missing ');
-
-
 exports.main = async (event, callback) => {
+
+    /**
+     * Input variables
+     * When building in HubSpot, remember to include these properties in the action settings.
+     */
+    const dealId = event.object.objectId;
+    const hs_mrr = event.inputFields.hs_mrr
+    const amount = event.inputFields.amount
+    const deal_currency_code = event.inputFields.deal_currency_code
 
     /**
      * The main currency code for your portal. 
      * If the current deal is in the main currency we do not convert the amount
      */
     const mainCurrencyCode = "USD";
-
-
-
-    const getDealInfos = (dealId, props) => {
-
-        const formatedProps = props.map(p => `properties=${p}`).join('&');
-
-        const endpoint = `https://api.hubapi.com/crm/v3/objects/deals/${dealId}?${formatedProps}&archived=false&`;
-
-        return axios.get(endpoint, axiosConfig);
-    }
-
-
-    if (!event.inputFields.dealId) throw new Error(' event.inputFields.dealId is not set, are you sure you added the dealId in the "property to include in code" option ? ');
-
-    const dealId = event.inputFields.dealId;
-
-    const deal = await getDealInfos(dealId, ['hs_mrr', 'amount', 'deal_currency_code']);
-
-
-    const { amount, deal_currency_code } = deal.data.properties;
-
 
     const exchangeRates = [{
         currency: "EUR",
@@ -68,7 +44,6 @@ exports.main = async (event, callback) => {
         amountConverted = amount * rate.exchangeRate;
 
     }
-
 
     callback({
         outputFields: {

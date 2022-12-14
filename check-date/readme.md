@@ -1,3 +1,3 @@
 # What does it do ? 
 
-The idea of this Custom Coded Action is
+This Custom Coded Action will check a specific propetty of the enrolled object against today's date and output whether it matches as a true or false value.

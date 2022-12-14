@@ -2,9 +2,6 @@ const hubspot = require('@hubspot/api-client');
 
 exports.main = async (event, callback) => {
 
-    console.log(event);
-    console.log(process.env.privateAppToken)
-
     const hubspotClient = new hubspot.Client({
         accessToken: process.env.privateAppToken
     });

@@ -4,11 +4,16 @@
 The idea of this repo is to share Custom Coded Actions which work with HubSpot Operations Hub pro. 
 It also provides a "framework" to work locally on your Custom Coded Action and execute it in the same context as HubSpot. 
 
-## How to use
-
-
 ### Prerequisites
-- Install Node.js from https://nodejs.org/en/download/
+
+You'll need Node.js installed. You can check if it's installed by running:
+```
+node -v
+```
+If you don't have Node.js installed, download it from https://nodejs.org/en/download/
+Note: HubSpot custom code actions use version 16. Changing node versions or running this in docker is not covered.
+
+## How to use
 
 ### Clone repo locally
 ```bash
