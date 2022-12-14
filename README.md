@@ -4,15 +4,14 @@
 The idea of this repo is to share Custom Coded Actions which work with HubSpot Operations Hub pro. 
 It also provides a "framework" to work locally on your Custom Coded Action and execute it in the same context as HubSpot. 
 
-
-
 ## How to use
 
-Prerequisites
+
+### Prerequisites
 - Install Node.js from https://nodejs.org/en/download/
 
 ### Clone repo locally
-```
+```bash
 gh repo clone elliott30/hubspot-custom-code-action-workspace
 ```
 ### Create a .env file
@@ -22,7 +21,7 @@ Create a .env file at the root of the project to store your secrets.
 If you're using HubSpot's APIs, you'll need to include a private app token from the HubSpot account you're accessing. Learn more about private app tokens here: https://developers.hubspot.com/docs/api/private-apps
 
 Your .env file will look something like this:
-```
+```json
 privateAppToken = "abcde-fghijk-lmnopq-rstuv-wxyz"
 googleApiKey = "1234567890"
 ```
@@ -31,11 +30,11 @@ googleApiKey = "1234567890"
 
 Run one of the existing projects using:
 
-```
+```bash
 npm run cca <folder-name>
 ```
 For example, to run the custom code action that gets a contact's name from your HubSpot account, run:
-```
+```bash
 npm run cca get-contact
 ```
 
@@ -45,13 +44,13 @@ npm run cca get-contact
 
 Initialize a new custom code action by calling 
 
-```
+```bash
 npm run init <nameOfYourAction>
 ```
 
 Like :
 
-```
+```bash
 npm run init my-new-custom-coded-action
 ```
 A new folder will be created with three files
