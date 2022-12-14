@@ -8,19 +8,35 @@ It also provides a "framework" to work locally on your Custom Coded Action and e
 
 ## How to use
 
-create a .env file at the root of the project with your privateAppToken 
+### Clone repo locally
+```
+gh repo clone elliott30/hubspot-custom-code-action-workspace
+```
+### Create a .env file
+```
+create a .env file at the root of the project to store your secrets
+If you're using HubSpot's APIs, you'll need to include a private app token from the HubSpot account you're accessing  
+Learn more about private app tokens here:
+https://developers.hubspot.com/docs/api/private-apps
 
 ```
+It should look something like this:
 privateAppToken = "sdfsd-dsfsdf-wwxcwx-ffdsdfdsf-fsdffdsfs"
 ```
-
-### Create a new project 
-
-
-You have to initialize a new project by calling 
+### (Optional) Test an existing an custom code action
 
 ```
-npm run init <nameOfYourProject>
+Run one of the existing projects, for example
+```
+
+
+### Create a new custom code action 
+
+
+You have to initialize a new custom code action by calling 
+
+```
+npm run init <nameOfYourAction>
 ```
 
 Like :
