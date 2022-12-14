@@ -54,10 +54,15 @@ Like :
 ```
 npm run init my-new-custom-coded-action
 ```
+A new folder will be created with three files
+- cca.js
+- event.js
+- readme
 
-The template created contains a first file name cca.js, this is where you write your code. 
 
+#### cca.js
 
+This is where you write your code. 
 
 ```JavaScript 
 const axios = require('axios');
@@ -124,33 +129,18 @@ In this example to access companyName, you have to use :
  const domainName = event.inputFields.domainName;
 ```
 
-Then execute the code by calling : 
+### Run custom code action
+
+Execute your code by calling : 
 
 ```bash
-node run.js ./name-of-the-folder/file-name.js 
+node run ccs <folder name> 
 ```
 
-or 
+Like:
 
 ```bash
-npm run cca ./get-siret-from-domain-name/cca.js
-```
-
-
-
-Or for more confort it can be a good idea to create an alias in your bashrc / .zshrc
-
-example : 
-```bash 
-cca(){
-    node /Users/userName/Documents/code/HubSpot-Operations-Hub-Custom-Coded-Action/run.js $1;   
-}
-```
-
-Then to invoke the  Custom Coded Action you can just call 
-
-```bash
-cca ./merge-companies-based-on-name/cca.js
+node run ccs get-contact 
 ```
 
 
