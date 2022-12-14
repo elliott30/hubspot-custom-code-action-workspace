@@ -1,0 +1,37 @@
+{
+  "name": "hubspot-operations-hub-custom-coded-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "node init.js",
+    "cca": "node run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Antoinebr/HubSpot-Operations-Hub-Custom-Coded-Action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Antoinebr/HubSpot-Operations-Hub-Custom-Coded-Action/issues"
+  },
+  "homepage": "https://github.com/Antoinebr/HubSpot-Operations-Hub-Custom-Coded-Action#readme",
+  "dependencies": {
+    "@hubspot/api-client": "^3.4.1",
+    "async": "^3.2.0",
+    "aws-sdk": "^2.858.0",
+    "axios": "^0.20.0",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.11.19",
+    "mysql": "^2.18.1",
+    "redis": "^3.0.2",
+    "request": "^2.88.2",
+    "bluebird": "3.7.2",
+    "random-number-csprng": "1.0.2",
+    "googleapis": "67.1.1",
+    "dotenv": "^16.0.3"
+  }
+}
